@@ -1,18 +1,14 @@
-package com.example.privatealbum.fragments
+package com.example.privatealbum.welcome
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.privatealbum.R
 import com.example.privatealbum.databinding.FragmentWelcomeBinding
-import com.example.privatealbum.setAnimationStatusChangeListener
-import com.example.privatealbum.startAnimationWithListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

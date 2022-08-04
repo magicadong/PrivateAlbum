@@ -1,6 +1,5 @@
-package com.example.privatealbum
+package com.example.privatealbum.welcome
 
-import android.content.Context
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -46,14 +45,8 @@ fun View.startAnimationWithListener(
     })
     this.startAnimation(animation)
 
-    add(1,2)
 }
 
-
-
-fun add(a: Int, b:Int):Int{
-    return a + b
-}
 
 
 
