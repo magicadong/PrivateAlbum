@@ -1,9 +1,11 @@
 package com.example.privatealbum
 
 import android.content.Context
+import android.graphics.RectF
 import android.os.Build
 import androidx.navigation.NavController
 import kotlinx.coroutines.*
+import java.time.Duration
 
 fun Context.dp2pxI(dp:Int):Int {
     return (resources.displayMetrics.density*dp).toInt()
@@ -33,6 +35,24 @@ fun NavController.delayNavigate(id:Int,scope:CoroutineScope){
         delay(500)
         withContext(Dispatchers.Main){
             navigate(id)
+        }
+    }
+}
+
+//实现Rect copy
+fun RectF.copy(srcRect:RectF){
+    left = srcRect.left
+    top = srcRect.top
+    right = srcRect.right
+    bottom = srcRect.bottom
+}
+
+//延迟操作
+fun postDelay(duration: Long, callBack:()->Unit = {}){
+    CoroutineScope(Dispatchers.IO).launch {
+        delay(duration)
+        withContext(Dispatchers.Main){
+            callBack()
         }
     }
 }
