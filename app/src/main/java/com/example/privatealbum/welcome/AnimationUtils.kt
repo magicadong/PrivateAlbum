@@ -1,8 +1,11 @@
 package com.example.privatealbum.welcome
 
+import android.animation.ObjectAnimator
 import android.view.View
+import android.view.animation.AccelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import java.time.Duration
 
 fun Animation.setAnimationStatusChangeListener(
     onStart:(Animation?)->Unit = {},
@@ -47,6 +50,24 @@ fun View.startAnimationWithListener(
 
 }
 
+
+//左右摆动的动画效果
+fun View.startShakeAnimation(offsetX:Float,time:Long){
+    ObjectAnimator.ofFloat(
+        this,
+        "translationX",
+        0f,
+        -offsetX,
+        2 * offsetX,
+        0f
+    ).apply {
+        duration = time
+        repeatCount = 2
+        repeatMode = ObjectAnimator.RESTART
+        interpolator = AccelerateInterpolator()
+        start()
+    }
+}
 
 
 

@@ -23,9 +23,6 @@ class AdvertisementFragment : Fragment() {
         binding = FragmentAdvertisementBinding.inflate(
             inflater,container,false)
 
-        //改变状态栏的颜色
-        requireActivity().window.statusBarColor = Color.parseColor("#E5FCFC")
-
         Glide
             .with(this)
             .load(Network.fetchImage())

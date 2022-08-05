@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_welcome" >
         <action
             android:id="@+id/action_welcomeFragment_to_advertisementFragment"
-            app:destination="@id/advertisementFragment" />
+            app:destination="@id/advertisementFragment"
+            app:popUpTo="@id/welcomeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/advertisementFragment"
@@ -29,5 +31,18 @@
         android:id="@+id/unlockFragment"
         android:name="com.example.privatealbum.password.UnlockFragment"
         android:label="fragment_unlock"
-        tools:layout="@layout/fragment_unlock" />
+        tools:layout="@layout/fragment_unlock" >
+        <action
+            android:id="@+id/action_unlockFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/enter_from_right_anim"
+            app:exitAnim="@anim/exit_to_left_anim"
+            app:popUpTo="@id/unlockFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.privatealbum.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
 </navigation>
