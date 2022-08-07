@@ -1,10 +1,17 @@
 package com.example.privatealbum
 
+import android.Manifest
 import android.animation.ObjectAnimator
+import android.app.Activity
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.registerForActivityResult
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.privatealbum.databinding.ActivityMainBinding
@@ -48,6 +55,18 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
+        requestReadPermission()
+    }
+    fun requestReadPermission(){
+        val result = ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE)
+        if (result != PackageManager.PERMISSION_GRANTED){
+            val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
+
+            }
+            permissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
+
     }
 
     fun showBottomNavigationView(){

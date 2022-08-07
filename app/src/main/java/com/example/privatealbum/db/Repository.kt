@@ -1,7 +1,7 @@
 package com.example.privatealbum.db
 
 import android.content.Context
-import androidx.lifecycle.LiveData
+import kotlinx.coroutines.flow.Flow
 
 class Repository(context: Context) {
     private var albumDao:AlbumDao
@@ -11,7 +11,7 @@ class Repository(context: Context) {
     }
 
     //加载相册
-    suspend fun loadAlbumWithType(type: Int):List<Album>{
+    suspend fun loadAlbumWithType(type: Int):Flow<List<Album>>{
         return albumDao.getAllAlumsWithType(type)
     }
 

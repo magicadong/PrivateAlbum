@@ -35,7 +35,6 @@ class WelcomeFragment : Fragment() {
 
             }
         )
-
     }
 
     fun navigateToNextScreen(){

@@ -1,7 +1,7 @@
 package com.example.privatealbum.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AlbumDao {
@@ -19,7 +19,8 @@ interface AlbumDao {
     fun updateAlbum(album: Album)
     /**查询所有相册信息 查询方法不要使用suspend修饰*/
     @Query("select * from Album where type = :type")
-    fun getAllAlumsWithType(type:Int):List<Album>
+    fun getAllAlumsWithType(type:Int):Flow<List<Album>>
+
     /**------------------相片----------------*/
     //插入一张图片
     @Insert

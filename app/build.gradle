@@ -68,4 +68,8 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:2.4.2")
     kapt("androidx.room:room-compiler:2.4.2")
     implementation("androidx.room:room-ktx:2.4.2")
+
+    //koil
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
 }

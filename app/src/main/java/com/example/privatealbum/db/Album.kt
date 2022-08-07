@@ -16,6 +16,7 @@ data class Album(
     var albumName:String,
     //@ColumnInfo(name = "cover_url") 设置字段在表里面的名字
     var coverUrl:String,
+    var number:Int,
     val type:Int = ALBUM_TYPE_IMAGE
 )
 

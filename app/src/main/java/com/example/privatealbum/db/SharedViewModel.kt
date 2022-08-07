@@ -11,7 +11,8 @@ import kotlinx.coroutines.launch
 class SharedViewModel(application: Application)
     :AndroidViewModel(application) {
     //保存所有相册信息
-    var albumList = MutableLiveData<List<Album>>(emptyList())
+    var imageAlbumList = MutableLiveData<List<Album>>(emptyList())
+    var videoAlbumList = MutableLiveData<List<Album>>(emptyList())
     //仓库对象
     val repository = Repository(application.applicationContext)
     //保存当前需要添加的相册是什么类型
@@ -21,14 +22,36 @@ class SharedViewModel(application: Application)
     fun loadAlbumsWithType(type:Int){
         viewModelScope.launch(Dispatchers.IO) {
             val result = repository.loadAlbumWithType(type)
-            albumList.postValue(result)
+            result.collect{
+                if (type == ALBUM_TYPE_IMAGE) {
+                    imageAlbumList.postValue(it)
+                }else{
+                    videoAlbumList.postValue(it)
+                }
+            }
         }
     }
     //插入相册
     fun addAlbum(name:String,type: Int){
         viewModelScope.launch(Dispatchers.IO){
-            val album = Album(0,name, DEFAULT_COVER_URL, type)
+            val album = Album(0,name, getApplication<Application>().DEFAULT_COVER_URL,0)
             repository.addAlbum(album)
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
