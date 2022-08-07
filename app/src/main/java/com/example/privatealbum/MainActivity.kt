@@ -6,6 +6,7 @@ import android.app.Activity
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -48,10 +49,18 @@ class MainActivity : AppCompatActivity() {
 
         //监听选项的点击事件
         binding.bottomNavigationView.setOnItemSelectedListener {
-            if (it.itemId == R.id.imageAlbumFragment){
+            //控制不重复点击
+            if (it.itemId == R.id.imageAlbumFragment
+                && binding.bottomNavigationView.selectedItemId != R.id.imageAlbumFragment){
                 model.type = ALBUM_TYPE_IMAGE
-            }else{
+                navHostFragment.navController.navigate(R.id.imageAlbumFragment)
+
+            }
+
+            if (it.itemId == R.id.videoAlbumFragment
+                && binding.bottomNavigationView.selectedItemId != R.id.videoAlbumFragment){
                 model.type = ALBUM_TYPE_VIDEO
+                navHostFragment.navController.navigate(R.id.videoAlbumFragment)
             }
             true
         }

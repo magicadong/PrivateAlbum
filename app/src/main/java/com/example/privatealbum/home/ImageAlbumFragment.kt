@@ -26,6 +26,10 @@ class ImageAlbumFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentImageAlbumBinding.inflate(inflater)
+        binding.model = model
+        binding.clickEvents = ClickEvents()
+        binding.lifecycleOwner = viewLifecycleOwner
+
         //监听相册数据
         model.imageAlbumList.observe(viewLifecycleOwner){
             adapter.setData(it)
@@ -41,6 +45,8 @@ class ImageAlbumFragment : Fragment() {
         val activity = requireActivity() as MainActivity
         activity.showBottomNavigationView()
         adapter = AlbumAdapter()
+        adapter.setModelAndLifeCycleOwner(model,viewLifecycleOwner)
+
         binding.recyclerView.layoutManager = GridLayoutManager(requireActivity(),2)
         binding.recyclerView.addItemDecoration(SpacingItemDecoration(requireActivity().dp2pxI(4)))
         binding.recyclerView.adapter = adapter

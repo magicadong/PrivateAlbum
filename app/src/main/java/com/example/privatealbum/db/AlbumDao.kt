@@ -8,12 +8,9 @@ interface AlbumDao {
     //创建相册
     @Insert
     fun insertAlbum(album: Album)
-    //删除一个相册
+    //删除相册
     @Delete
-    fun deleteAlbum(album: Album)
-    //删除多个相册
-    @Delete
-    fun deleteAlbums(vararg albums:Album)
+    fun deleteAlbums(albums:List<Album>)
     //更新相册
     @Update
     fun updateAlbum(album: Album)

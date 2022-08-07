@@ -1,28 +1,43 @@
 package com.example.privatealbum.home
 
 import android.annotation.SuppressLint
-import android.net.Uri
-import android.util.Log
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.privatealbum.DEFAULT_COVER_URL
 import com.example.privatealbum.R
 import com.example.privatealbum.databinding.AlbumItemBinding
 import com.example.privatealbum.db.Album
+import com.example.privatealbum.db.SharedViewModel
 import java.io.File
 
 class AlbumAdapter: RecyclerView.Adapter<AlbumAdapter.MyViewHolder>() {
     private var albums:List<Album> = emptyList()
+    private lateinit var model: SharedViewModel
+    private lateinit var owner: LifecycleOwner
+    private lateinit var binding:AlbumItemBinding
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return MyViewHolder(AlbumItemBinding.inflate(inflater))
+        binding = AlbumItemBinding.inflate(inflater)
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(albums[position])
+        val album = albums[position]
+        holder.bind(album)
+        binding.model = model
+        binding.album = album
+        binding.clickEvents = ClickEvents()
+        binding.lifecycleOwner = owner
+
+        if (!model.isAlbumInDeleteList(album)){
+            //正在给这个item绑定数据，而且这个item也没有在删除数组里面 这个相册的checkbox还原为正常
+            binding.checkBoxInAlbumItem.imageTintList = ColorStateList.valueOf(Color.parseColor("#bfbfbf"))
+        }
     }
 
     override fun getItemCount(): Int {
@@ -34,7 +49,7 @@ class AlbumAdapter: RecyclerView.Adapter<AlbumAdapter.MyViewHolder>() {
             //加载图片
             Glide
                 .with(itemView)
-                .load("https://t7.baidu.com/it/u=852388090,130270862&fm=193&f=GIF")
+                .load(album.coverUrl)
                 .into(binding.coverImageView)
             binding.coverImageView
             binding.nameTextView.text = album.albumName
@@ -49,5 +64,10 @@ class AlbumAdapter: RecyclerView.Adapter<AlbumAdapter.MyViewHolder>() {
         albums = newData
         //刷新界面
         notifyDataSetChanged()
+    }
+
+    fun setModelAndLifeCycleOwner(aModel: SharedViewModel,aOwner:LifecycleOwner){
+        model = aModel
+        owner = aOwner
     }
 }

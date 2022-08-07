@@ -19,4 +19,9 @@ class Repository(context: Context) {
     suspend fun addAlbum(album: Album){
         albumDao.insertAlbum(album)
     }
+
+    //删除相册
+    suspend fun deleteAlbums(albums: List<Album>){
+        albumDao.deleteAlbums(albums)
+    }
 }
