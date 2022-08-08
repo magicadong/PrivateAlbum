@@ -5,6 +5,8 @@ import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.animation.BounceInterpolator
+import com.example.privatealbum.dp2pxF
 import java.time.Duration
 
 fun Animation.setAnimationStatusChangeListener(
@@ -66,6 +68,38 @@ fun View.startShakeAnimation(offsetX:Float,time:Long){
         repeatMode = ObjectAnimator.RESTART
         interpolator = AccelerateInterpolator()
         start()
+    }
+}
+
+//菜单列表弹出动画
+fun startPopUpAnimation(targets: List<View>, space:Int){
+    val spacePx = targets[0].context.dp2pxF(space)
+
+    targets.forEachIndexed { index, view ->
+        ObjectAnimator.ofFloat(
+            view,
+            "translationY",
+            -(index+1) * (spacePx+view.height)).apply {
+            duration = 500
+            interpolator = BounceInterpolator()
+            startDelay = index*100L
+            start()
+        }
+    }
+}
+
+//菜单列表弹出动画
+fun startPopBackAnimation(targets: List<View>){
+    targets.forEachIndexed { index, view ->
+        ObjectAnimator.ofFloat(
+            view,
+            "translationY",
+            0f).apply {
+            duration = 500
+            interpolator = BounceInterpolator()
+            startDelay = index*100L
+            start()
+        }
     }
 }
 

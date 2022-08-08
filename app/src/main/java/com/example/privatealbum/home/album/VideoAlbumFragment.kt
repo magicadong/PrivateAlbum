@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.privatealbum.MainActivity
 import com.example.privatealbum.databinding.FragmentVideoAlbumBinding
 import com.example.privatealbum.db.ALBUM_TYPE_VIDEO
 import com.example.privatealbum.db.SharedViewModel
@@ -37,7 +38,8 @@ class VideoAlbumFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter = AlbumAdapter()
         adapter.setModelAndLifeCycleOwner(model,viewLifecycleOwner)
-
+        val activity = requireActivity() as MainActivity
+        activity.showBottomNavigationView()
         binding.recyclerView.layoutManager = GridLayoutManager(requireActivity(),2)
         binding.recyclerView.addItemDecoration(SpacingItemDecoration(requireActivity().dp2pxI(4)))
         binding.recyclerView.adapter = adapter

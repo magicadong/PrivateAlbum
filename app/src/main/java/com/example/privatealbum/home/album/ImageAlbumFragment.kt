@@ -1,6 +1,7 @@
 package com.example.privatealbum.home.album
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,7 @@ class ImageAlbumFragment : Fragment() {
         //请求加载图片相册
         model.loadAlbumsWithType(ALBUM_TYPE_IMAGE)
 
+        Log.v("pxd","onCreateView")
         return binding.root
     }
 
@@ -50,4 +52,9 @@ class ImageAlbumFragment : Fragment() {
         binding.recyclerView.adapter = adapter
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+//        val activity = requireActivity() as MainActivity
+//        activity.hideBottomNavigationView()
+    }
 }

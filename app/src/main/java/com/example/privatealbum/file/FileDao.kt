@@ -16,6 +16,15 @@ class FileDao(val context: Context) {
     //视频文件名
     private val videoDirName = "video"
 
+    //获取相册对应的路径 files/albums/ios
+    private fun getAlbumDirPath(albumName:String) = "${albumRootPath}/$albumName"
+    //获取缩略图的路径 files/albums/ios/thumb
+    private fun getThumbDirPath(albumName: String) = "${albumRootPath}/$albumName/$thumbnailDirName"
+    //获取原图的路径 files/albums/ios/orgin
+    private fun getOriginDirPath(albumName: String) = "${albumRootPath}/$albumName/$originDirName"
+    //获取视频的路径 files/albums/ios/video
+    private fun getVideoDirPath(albumName: String) = "${albumRootPath}/$albumName/$videoDirName"
+
 
     //创建相册
     fun createAlbum(album: Album){
@@ -30,6 +39,15 @@ class FileDao(val context: Context) {
             createDirectoryWithPath(getVideoDirPath(album.albumName))
         }
     }
+
+    //创建一个目录/文件夹
+    private fun createDirectoryWithPath(path:String){
+        val file = File(path)
+        if (!file.exists()){
+            file.mkdirs()
+        }
+    }
+
     //删除相册
     fun deleteAlbums(albums: List<Album>){
         albums.forEach { album ->
@@ -45,23 +63,6 @@ class FileDao(val context: Context) {
             deleteHoleDirWithPath(getAlbumDirPath(album.albumName))
         }
     }
-
-    //获取相册对应的路径 files/albums/ios
-    private fun getAlbumDirPath(albumName:String) = "${albumRootPath}/$albumName"
-    //获取缩略图的路径 files/albums/ios/thumb
-    private fun getThumbDirPath(albumName: String) = "${albumRootPath}/$albumName/$thumbnailDirName"
-    //获取原图的路径 files/albums/ios/orgin
-    private fun getOriginDirPath(albumName: String) = "${albumRootPath}/$albumName/$originDirName"
-    //获取视频的路径 files/albums/ios/video
-    private fun getVideoDirPath(albumName: String) = "${albumRootPath}/$albumName/$videoDirName"
-    //创建一个目录/文件夹
-    private fun createDirectoryWithPath(path:String){
-        val file = File(path)
-        if (!file.exists()){
-            file.mkdirs()
-        }
-    }
-
     //删除一个目录和目录下面的所有内容
     private fun deleteHoleDirWithPath(path: String){
         //创建path对应的file对象

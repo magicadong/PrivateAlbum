@@ -6,7 +6,9 @@ import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.findFragment
 import androidx.navigation.findNavController
+import com.example.privatealbum.MainActivity
 import com.example.privatealbum.R
 import com.example.privatealbum.db.ALBUM_TYPE_IMAGE
 import com.example.privatealbum.db.Album

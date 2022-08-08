@@ -75,31 +75,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showBottomNavigationView(){
-        if (binding.bottomAppBar.alpha.equals(0f)){
-            binding.bottomAppBar.alpha = 1f
-            ObjectAnimator.ofFloat(
-                binding.bottomAppBar,
-                "translationY",
-                binding.bottomAppBar.height.toFloat(),
-                0f
-            ).apply {
-                duration = 500
-                start()
-            }
 
-            ObjectAnimator.ofFloat(
-                binding.floatingActionButton,
-                "alpha",
-                1f
-            ).apply {
-                duration = 500
-                start()
-            }
+        ObjectAnimator.ofFloat(
+            binding.bottomAppBar,
+            "translationY",
+            binding.bottomAppBar.height.toFloat(),
+            0f
+        ).apply {
+            duration = 500
+            start()
+        }
+
+        ObjectAnimator.ofFloat(
+            binding.floatingActionButton,
+            "alpha",
+            1f
+        ).apply {
+            duration = 500
+            start()
         }
     }
 
     fun hideBottomNavigationView(){
-
         ObjectAnimator.ofFloat(
             binding.bottomAppBar,
             "translationY",
