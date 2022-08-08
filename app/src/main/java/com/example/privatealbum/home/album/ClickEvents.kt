@@ -1,15 +1,17 @@
-package com.example.privatealbum.home
+package com.example.privatealbum.home.album
 
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
+import androidx.navigation.findNavController
 import com.example.privatealbum.R
+import com.example.privatealbum.db.ALBUM_TYPE_IMAGE
 import com.example.privatealbum.db.Album
 import com.example.privatealbum.db.SharedViewModel
+import com.example.privatealbum.home.album.AlbumNameDialog
 
 class ClickEvents {
     fun addAlbum(view:View, model:SharedViewModel){
@@ -52,6 +54,12 @@ class ClickEvents {
             }
         }else{
             //进入相册缩略图页面
+            val action = if (album.type == ALBUM_TYPE_IMAGE) {
+                 ImageAlbumFragmentDirections.actionImageAlbumFragmentToThumbImageFragment(album)
+            }else{
+                 VideoAlbumFragmentDirections.actionVideoAlbumFragmentToThumbImageFragment(album)
+            }
+            view.findNavController().navigate(action)
         }
     }
 
@@ -60,3 +68,12 @@ class ClickEvents {
         model.deleteSelectedAlbum()
     }
 }
+
+
+
+
+
+
+
+
+

@@ -1,8 +1,9 @@
 package com.example.privatealbum.db
 
-import androidx.room.ColumnInfo
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
 const val ALBUM_TYPE_IMAGE = 0
 const val ALBUM_TYPE_VIDEO = 1
@@ -10,6 +11,7 @@ const val ALBUM_TYPE_VIDEO = 1
 /**默认表名就是类名*/
 //@Entity(tableName = "album_table")
 @Entity
+@Parcelize
 data class Album(
     @PrimaryKey(autoGenerate = true)/**主键*/
     val id:Int,
@@ -18,7 +20,7 @@ data class Album(
     var coverUrl:String,
     var number:Int,
     val type:Int = ALBUM_TYPE_IMAGE
-)
+):Parcelable
 
 @Entity
 data class ThumbImage(

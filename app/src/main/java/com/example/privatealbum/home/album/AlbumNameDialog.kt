@@ -1,13 +1,9 @@
-package com.example.privatealbum.home
+package com.example.privatealbum.home.album
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.privatealbum.R
 import com.example.privatealbum.databinding.AlbumNameDialogBinding
 
 

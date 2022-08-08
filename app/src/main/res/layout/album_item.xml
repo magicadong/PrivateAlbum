@@ -9,7 +9,7 @@
             type="com.example.privatealbum.db.SharedViewModel" />
         <variable
             name="clickEvents"
-            type="com.example.privatealbum.home.ClickEvents" />
+            type="com.example.privatealbum.home.album.ClickEvents" />
         <variable
             name="album"
             type="com.example.privatealbum.db.Album" />

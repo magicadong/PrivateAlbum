@@ -1,4 +1,4 @@
-package com.example.privatealbum.home
+package com.example.privatealbum.home.album
 
 import android.util.Log
 import android.view.View

@@ -9,7 +9,7 @@
             type="com.example.privatealbum.db.SharedViewModel" />
         <variable
             name="clickEvents"
-            type="com.example.privatealbum.home.ClickEvents" />
+            type="com.example.privatealbum.home.album.ClickEvents" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F5F5F5"
-        tools:context=".home.ImageAlbumFragment">
+        tools:context=".home.album.ImageAlbumFragment">
 
         <View
             android:id="@+id/view"

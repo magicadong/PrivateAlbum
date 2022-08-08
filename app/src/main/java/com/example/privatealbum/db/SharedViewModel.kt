@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.privatealbum.DEFAULT_COVER_URL
+import com.example.privatealbum.file.FileMananger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -13,8 +14,10 @@ class SharedViewModel(application: Application)
     //保存所有相册信息
     var imageAlbumList = MutableLiveData<List<Album>>(emptyList())
     var videoAlbumList = MutableLiveData<List<Album>>(emptyList())
-    //仓库对象
-    val repository = Repository(application.applicationContext)
+    //数据库仓库对象
+    private val repository = Repository(application.applicationContext)
+    //文件管理器对象
+    private val fileManager = FileMananger.getInstance(application)
     //保存当前需要添加的相册是什么类型
     var type = ALBUM_TYPE_IMAGE
 
@@ -58,15 +61,16 @@ class SharedViewModel(application: Application)
     }
     //插入相册
     fun addAlbum(name:String,type: Int){
+        //构建相册对象
+        val album = Album(0, name, getApplication<Application>().DEFAULT_COVER_URL, 0, type = type
+        )
+
         viewModelScope.launch(Dispatchers.IO){
-            val album = Album(
-                0,
-                name,
-                getApplication<Application>().DEFAULT_COVER_URL,
-                0,
-                type = type
-            )
+            //数据库插入一条相册记录
             repository.addAlbum(album)
+
+            //文件里面创建相册
+            fileManager.createAlbum(album)
         }
     }
 
@@ -74,7 +78,10 @@ class SharedViewModel(application: Application)
     fun deleteSelectedAlbum(){
         if (deleteAlbumList.isNotEmpty()) {
             viewModelScope.launch(Dispatchers.IO) {
+                //数据库中删除
                 repository.deleteAlbums(deleteAlbumList)
+                //文件中删除
+                fileManager.deleteAlbums(deleteAlbumList)
                 deleteAlbumList.clear()
             }
         }

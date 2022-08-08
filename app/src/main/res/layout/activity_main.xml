@@ -9,7 +9,7 @@
             type="com.example.privatealbum.db.SharedViewModel" />
         <variable
             name="clickEvent"
-            type="com.example.privatealbum.home.ClickEvents" />
+            type="com.example.privatealbum.home.album.ClickEvents" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

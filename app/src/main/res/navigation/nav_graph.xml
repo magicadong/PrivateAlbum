@@ -42,12 +42,37 @@
     </fragment>
     <fragment
         android:id="@+id/imageAlbumFragment"
-        android:name="com.example.privatealbum.home.ImageAlbumFragment"
+        android:name="com.example.privatealbum.home.album.ImageAlbumFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_image_album" />
+        tools:layout="@layout/fragment_image_album" >
+        <action
+            android:id="@+id/action_imageAlbumFragment_to_thumbImageFragment"
+            app:destination="@id/thumbImageFragment"
+            app:enterAnim="@anim/enter_from_right_anim"
+            app:exitAnim="@anim/exit_to_left_anim"
+            app:popEnterAnim="@anim/pop_enter_from_left_anim"
+            app:popExitAnim="@anim/pop_exit_to_right_anim" />
+    </fragment>
     <fragment
         android:id="@+id/videoAlbumFragment"
-        android:name="com.example.privatealbum.home.VideoAlbumFragment"
+        android:name="com.example.privatealbum.home.album.VideoAlbumFragment"
         android:label="fragment_video_album"
-        tools:layout="@layout/fragment_video_album" />
+        tools:layout="@layout/fragment_video_album" >
+        <action
+            android:id="@+id/action_videoAlbumFragment_to_thumbImageFragment"
+            app:destination="@id/thumbImageFragment"
+            app:enterAnim="@anim/enter_from_right_anim"
+            app:exitAnim="@anim/exit_to_left_anim"
+            app:popEnterAnim="@anim/pop_enter_from_left_anim"
+            app:popExitAnim="@anim/pop_exit_to_right_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/thumbImageFragment"
+        android:name="com.example.privatealbum.home.thumb.ThumbImageFragment"
+        android:label="fragment_thumb_image"
+        tools:layout="@layout/fragment_thumb_image" >
+        <argument
+            android:name="album"
+            app:argType="com.example.privatealbum.db.Album" />
+    </fragment>
 </navigation>

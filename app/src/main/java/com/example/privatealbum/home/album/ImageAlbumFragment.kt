@@ -1,16 +1,14 @@
-package com.example.privatealbum.home
+package com.example.privatealbum.home.album
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.privatealbum.MainActivity
-import com.example.privatealbum.R
 import com.example.privatealbum.databinding.FragmentImageAlbumBinding
 import com.example.privatealbum.db.ALBUM_TYPE_IMAGE
 import com.example.privatealbum.db.SharedViewModel

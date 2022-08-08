@@ -2,15 +2,11 @@ package com.example.privatealbum
 
 import android.Manifest
 import android.animation.ObjectAnimator
-import android.app.Activity
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowManager
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.registerForActivityResult
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
@@ -19,7 +15,7 @@ import com.example.privatealbum.databinding.ActivityMainBinding
 import com.example.privatealbum.db.ALBUM_TYPE_IMAGE
 import com.example.privatealbum.db.ALBUM_TYPE_VIDEO
 import com.example.privatealbum.db.SharedViewModel
-import com.example.privatealbum.home.ClickEvents
+import com.example.privatealbum.home.album.ClickEvents
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding:ActivityMainBinding

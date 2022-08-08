@@ -15,6 +15,7 @@ abstract class AlbumDatabase: RoomDatabase() {
     abstract fun albumDao():AlbumDao
 
     companion object{
+        @Volatile
         private var INSTANCE:AlbumDatabase? = null
         fun getInstance(context: Context):AlbumDatabase{
             if (INSTANCE != null){

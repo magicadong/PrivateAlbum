@@ -1,4 +1,4 @@
-package com.example.privatealbum.home
+package com.example.privatealbum.home.album
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.privatealbum.R
 import com.example.privatealbum.databinding.FragmentVideoAlbumBinding
 import com.example.privatealbum.db.ALBUM_TYPE_VIDEO
 import com.example.privatealbum.db.SharedViewModel
