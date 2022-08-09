@@ -11,6 +11,9 @@ import kotlinx.coroutines.launch
 
 class SharedViewModel(application: Application)
     :AndroidViewModel(application) {
+    //管理BottomNavigationView的显示或者隐藏
+    var shouldShowBottomNavView = MutableLiveData(false)
+
     //保存所有相册信息
     var imageAlbumList = MutableLiveData<List<Album>>(emptyList())
     var videoAlbumList = MutableLiveData<List<Album>>(emptyList())

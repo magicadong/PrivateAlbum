@@ -7,6 +7,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.BounceInterpolator
 import com.example.privatealbum.dp2pxF
+import com.google.android.material.bottomappbar.BottomAppBar
 import java.time.Duration
 
 fun Animation.setAnimationStatusChangeListener(
@@ -103,7 +104,53 @@ fun startPopBackAnimation(targets: List<View>){
     }
 }
 
+fun showBottomNavigationView(bottomAppBar:BottomAppBar){
+    bottomAppBar.alpha = 1f
+    ObjectAnimator.ofFloat(
+        bottomAppBar,
+        "translationY",
+        bottomAppBar.height.toFloat(),
+        0f
+    ).apply {
+        duration = 500
+        start()
+    }
+}
+fun hideBottomNavigationView(bottomAppBar: BottomAppBar){
+    ObjectAnimator.ofFloat(
+        bottomAppBar,
+        "translationY",
+        0f,
+        bottomAppBar.height.toFloat()
+    ).apply {
+        duration = 500
+        start()
+    }
+}
 
+fun showFloatingActionButton(view: View){
+    view.isEnabled = true
+    ObjectAnimator.ofFloat(
+        view,
+        "alpha",
+        1f
+    ).apply {
+        duration = 500
+        start()
+    }
+}
+
+fun hideFloatingActionButton(view: View){
+    view.isEnabled = false
+    ObjectAnimator.ofFloat(
+        view,
+        "alpha",
+        0f
+    ).apply {
+        duration = 500
+        start()
+    }
+}
 
 
 

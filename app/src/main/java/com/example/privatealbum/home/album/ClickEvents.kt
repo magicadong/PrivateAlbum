@@ -62,6 +62,9 @@ class ClickEvents {
                  VideoAlbumFragmentDirections.actionVideoAlbumFragmentToThumbImageFragment(album)
             }
             view.findNavController().navigate(action)
+
+            //隐藏 BottomAppBar 和 FloatingActionButton
+            model.shouldShowBottomNavView.postValue(false)
         }
     }
 

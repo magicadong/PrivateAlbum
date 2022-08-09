@@ -1,6 +1,7 @@
 package com.example.privatealbum.home.album
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +32,8 @@ class VideoAlbumFragment : Fragment() {
             adapter.setData(it)
         }
         model.loadAlbumsWithType(ALBUM_TYPE_VIDEO)
+
+        Log.v("pxd","video:$model")
         return binding.root
     }
 
@@ -38,11 +41,12 @@ class VideoAlbumFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter = AlbumAdapter()
         adapter.setModelAndLifeCycleOwner(model,viewLifecycleOwner)
-        val activity = requireActivity() as MainActivity
-        activity.showBottomNavigationView()
+
+        //显示 BottomAppBar 和 FloatingActionButton
+        model.shouldShowBottomNavView.postValue(true)
+
         binding.recyclerView.layoutManager = GridLayoutManager(requireActivity(),2)
         binding.recyclerView.addItemDecoration(SpacingItemDecoration(requireActivity().dp2pxI(4)))
         binding.recyclerView.adapter = adapter
     }
-
 }

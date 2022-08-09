@@ -23,6 +23,7 @@
             android:id="@+id/coverImageView"
             android:layout_width="0dp"
             android:layout_height="250dp"
+            android:scaleType="centerCrop"
             android:background="@color/purple_200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +63,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/backBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -78,9 +79,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_pen"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintBottom_toBottomOf="@+id/backBtn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="@+id/backBtn"
             app:tint="@color/white" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -121,7 +122,6 @@
             android:layout_marginBottom="24dp"
             android:clickable="true"
             android:tag="0"
-            android:onClick="@{(view)->clickEvents.changeMenuStatus(view,model)}"
             android:src="@drawable/add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

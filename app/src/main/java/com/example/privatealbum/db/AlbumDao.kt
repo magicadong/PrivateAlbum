@@ -18,6 +18,10 @@ interface AlbumDao {
     @Query("select * from Album where type = :type")
     fun getAllAlumsWithType(type:Int):Flow<List<Album>>
 
+    //查询一个相册信息
+    @Query("select * from Album where id = :albumId")
+    fun getAlbumInfo(albumId:Int):Flow<Album>
+
     /**------------------相片----------------*/
     //插入一张图片
     @Insert
@@ -32,6 +36,9 @@ interface AlbumDao {
     @Delete
     fun deleteImages(vararg images:ThumbImage)
 
+    //查询图片
+    @Query("select * from ThumbImage where albumId = :albumId")
+    fun getAllImagesWithAlbumId(albumId: Int):Flow<List<ThumbImage>>
     /**
      * 相册和缩略图的关系
      * 1 vs N

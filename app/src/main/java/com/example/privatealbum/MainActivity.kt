@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -16,6 +17,12 @@ import com.example.privatealbum.db.ALBUM_TYPE_IMAGE
 import com.example.privatealbum.db.ALBUM_TYPE_VIDEO
 import com.example.privatealbum.db.SharedViewModel
 import com.example.privatealbum.home.album.ClickEvents
+import io.ak1.pix.helpers.PixEventCallback
+import io.ak1.pix.helpers.addPixToActivity
+import io.ak1.pix.helpers.pixFragment
+import io.ak1.pix.models.Mode
+import io.ak1.pix.models.Options
+import io.ak1.pix.models.Ratio
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding:ActivityMainBinding
@@ -62,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         requestReadPermission()
+
     }
     fun requestReadPermission(){
         val result = ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -70,51 +78,6 @@ class MainActivity : AppCompatActivity() {
 
             }
             permissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-        }
-
-    }
-
-    fun showBottomNavigationView(){
-
-        ObjectAnimator.ofFloat(
-            binding.bottomAppBar,
-            "translationY",
-            binding.bottomAppBar.height.toFloat(),
-            0f
-        ).apply {
-            duration = 500
-            start()
-        }
-
-        ObjectAnimator.ofFloat(
-            binding.floatingActionButton,
-            "alpha",
-            1f
-        ).apply {
-            duration = 500
-            start()
-        }
-    }
-
-    fun hideBottomNavigationView(){
-        ObjectAnimator.ofFloat(
-            binding.bottomAppBar,
-            "translationY",
-            0f,
-            binding.bottomAppBar.height.toFloat()
-        ).apply {
-            duration = 500
-            start()
-        }
-
-
-        ObjectAnimator.ofFloat(
-            binding.floatingActionButton,
-            "alpha",
-            1f,0f
-        ).apply {
-            duration = 500
-            start()
         }
     }
 }

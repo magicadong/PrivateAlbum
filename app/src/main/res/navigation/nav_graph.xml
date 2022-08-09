@@ -74,5 +74,21 @@
         <argument
             android:name="album"
             app:argType="com.example.privatealbum.db.Album" />
+        <action
+            android:id="@+id/action_thumbImageFragment_to_mediaPickerFragment"
+            app:destination="@id/mediaPickerFragment"
+            app:enterAnim="@anim/enter_from_bottom_anim"
+            app:exitAnim="@anim/exit_to_top_anim"
+            app:popEnterAnim="@anim/pop_enter_from_top_anim"
+            app:popExitAnim="@anim/pop_exit_to_bottom_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/mediaPickerFragment"
+        android:name="com.example.privatealbum.home.thumb.MediaPickerFragment"
+        android:label="fragment_media_picker"
+        tools:layout="@layout/fragment_media_picker" >
+        <argument
+            android:name="ablum"
+            app:argType="com.example.privatealbum.db.Album" />
     </fragment>
 </navigation>

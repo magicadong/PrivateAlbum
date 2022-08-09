@@ -29,6 +29,8 @@ class ImageAlbumFragment : Fragment() {
         binding.clickEvents = ClickEvents()
         binding.lifecycleOwner = viewLifecycleOwner
 
+        Log.v("pxd","iamge:$model")
+
         //监听相册数据
         model.imageAlbumList.observe(viewLifecycleOwner){
             adapter.setData(it)
@@ -36,25 +38,19 @@ class ImageAlbumFragment : Fragment() {
         //请求加载图片相册
         model.loadAlbumsWithType(ALBUM_TYPE_IMAGE)
 
-        Log.v("pxd","onCreateView")
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val activity = requireActivity() as MainActivity
-        activity.showBottomNavigationView()
+        //显示 BottomAppBar 和 FloatingActionButton
+        model.shouldShowBottomNavView.postValue(true)
+
         adapter = AlbumAdapter()
         adapter.setModelAndLifeCycleOwner(model,viewLifecycleOwner)
 
         binding.recyclerView.layoutManager = GridLayoutManager(requireActivity(),2)
         binding.recyclerView.addItemDecoration(SpacingItemDecoration(requireActivity().dp2pxI(4)))
         binding.recyclerView.adapter = adapter
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-//        val activity = requireActivity() as MainActivity
-//        activity.hideBottomNavigationView()
     }
 }

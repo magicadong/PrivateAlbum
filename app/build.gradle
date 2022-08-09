@@ -71,9 +71,12 @@ dependencies {
     kapt("androidx.room:room-compiler:2.4.2")
     implementation("androidx.room:room-ktx:2.4.2")
 
-    //koil
+    //glide
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
 
     implementation 'androidx.fragment:fragment-ktx:1.5.1'
+
+    //PixImagePicker
+    implementation  'io.ak1.pix:piximagepicker:1.6.3'
 }

@@ -32,9 +32,10 @@
             android:layout_gravity="bottom"
             app:fabCradleMargin="15dp"
             app:fabCradleRoundedCornerRadius="20dp"
+            android:tag="1"
             android:alpha="0"
-            tools:alpha="1"
-            android:backgroundTint="@color/green">
+            android:backgroundTint="@color/green"
+            shouldShow="@{model.shouldShowBottomNavView}">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavigationView"
@@ -52,8 +53,8 @@
             app:srcCompat="@drawable/add"
             app:tint="@color/white"
             app:layout_anchor="@id/bottomAppBar"
-            android:alpha="0"
-            tools:alpha="1"
+            android:tag="1"
+            shouldShow="@{model.shouldShowBottomNavView}"
             android:onClick="@{(view)->clickEvent.addAlbum(view,model)}"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
