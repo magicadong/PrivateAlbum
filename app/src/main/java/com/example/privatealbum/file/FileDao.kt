@@ -39,7 +39,7 @@ class FileDao(val context: Context) {
         return getOriginFilePath(albumName, fileName)
     }
     //从相册的orgin目录中获取某个文件的完整路径
-    private fun getOriginFilePath(albumName: String,fileName: String):String{
+    fun getOriginFilePath(albumName: String,fileName: String):String{
         return "${getOriginDirPath(albumName)}/$fileName"
     }
     //从相册的thumb目录中获取某个文件的完整路径
@@ -160,7 +160,33 @@ class FileDao(val context: Context) {
         }
         file.delete() //删除这个目录
     }
+
+    //删除文件
+    fun deleteImageFileWithAlbum(albumName: String, fileName: String){
+        val thumbPath = getThumbFilePath(albumName, fileName)
+        deleteFile(thumbPath)
+
+        val originPath = getOriginFilePath(albumName, fileName)
+        deleteFile(originPath)
+    }
+
+    //删除文件
+    fun deleteVideoFileWithAlbum(albumName: String, fileName: String){
+        deleteImageFileWithAlbum(albumName, fileName)
+
+        val videoPath = getVideoFilePath(albumName, fileName)
+        deleteFile(videoPath)
+    }
+
+    fun deleteFile(filePath: String){
+        File(filePath).apply {
+            if (this.exists()){
+                delete()
+            }
+        }
+    }
 }
+
 
 
 

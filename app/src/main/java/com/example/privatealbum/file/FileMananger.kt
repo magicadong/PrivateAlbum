@@ -64,6 +64,21 @@ class FileMananger private constructor(val context: Context){
     fun getThumImageFilePath(albumName:String, fileName:String):String{
         return fileDao.getThumbFilePath(albumName, fileName)
     }
+
+    //从相册的orgin目录中获取某个文件的完整路径
+    fun getOriginFilePath(albumName: String,fileName: String):String{
+        return fileDao.getOriginFilePath(albumName, fileName)
+    }
+
+    //删除图片文件
+    fun deleteImageFileWithAlbum(albumName: String, fileName: String){
+        fileDao.deleteImageFileWithAlbum(albumName, fileName)
+    }
+
+    //删除视频文件
+    fun deleteVideoFileWithAlbum(albumName: String, fileName: String){
+        fileDao.deleteVideoFileWithAlbum(albumName, fileName)
+    }
 }
 
 

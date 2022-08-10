@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.privatealbum.DEFAULT_COVER_URL
 import com.example.privatealbum.db.ALBUM_TYPE_IMAGE
 import com.example.privatealbum.db.Album
 import com.example.privatealbum.db.Repository
@@ -48,9 +49,13 @@ class ThumbViewModel(application:Application): AndroidViewModel(application){
         }
     }
 
-    //获取相册中文件的完整路径
+    //获取相册中缩略文件的完整路径
     fun getThumImageFilePath(albumName:String, fileName:String):String{
         return fileManager.getThumImageFilePath(albumName, fileName)
+    }
+    //获取相册中原始文件的完整路径
+    fun getOriginImageFilePath(fileName:String):String{
+        return fileManager.getOriginFilePath(currentAlbum.value!!.albumName, fileName)
     }
 
     //保存一张图片
@@ -90,5 +95,44 @@ class ThumbViewModel(application:Application): AndroidViewModel(application){
     private fun getNameFromTime(type:String):String{
         val timeStr =SimpleDateFormat("yyyy-MM-dd-hh-mm-ss", Locale.CHINESE).format(Date())
         return "$timeStr.$type"
+    }
+
+    //删除一张图片
+    fun deleteImage(thumbImage: ThumbImage){
+
+        viewModelScope.launch(Dispatchers.IO){
+            //数据库删除
+            repository.deleteImage(thumbImage)
+
+            //更新相册
+            if(currentAlbum.value!!.number > 0){
+                currentAlbum.value!!.number--
+                if(currentAlbum.value!!.number == 0){
+                    currentAlbum.value!!.coverUrl = getApplication<Application>().DEFAULT_COVER_URL
+                }
+            }
+            repository.updateAlbum(currentAlbum.value!!)
+
+            //删除文件
+            deleteFile(thumbImage)
+
+            thumbImageList.postValue(
+                thumbImageList.value!!.filter {
+                    if ( it == thumbImage){
+                        false
+                    }
+                    true
+                }
+            )
+        }
+    }
+
+    //删除图片文件
+    private fun deleteFile(thumbImage: ThumbImage){
+        if (currentAlbum.value!!.type == ALBUM_TYPE_IMAGE){
+            fileManager.deleteImageFileWithAlbum(currentAlbum.value!!.albumName,thumbImage.imageName)
+        }else{
+            fileManager.deleteVideoFileWithAlbum(currentAlbum.value!!.albumName,thumbImage.imageName)
+        }
     }
 }

@@ -81,6 +81,9 @@
             app:exitAnim="@anim/exit_to_top_anim"
             app:popEnterAnim="@anim/pop_enter_from_top_anim"
             app:popExitAnim="@anim/pop_exit_to_bottom_anim" />
+        <action
+            android:id="@+id/action_thumbImageFragment_to_browserFragment"
+            app:destination="@id/browserFragment" />
     </fragment>
     <fragment
         android:id="@+id/mediaPickerFragment"
@@ -90,5 +93,14 @@
         <argument
             android:name="ablum"
             app:argType="com.example.privatealbum.db.Album" />
+    </fragment>
+    <fragment
+        android:id="@+id/browserFragment"
+        android:name="com.example.privatealbum.home.browser.BrowserFragment"
+        android:label="fragment_browser"
+        tools:layout="@layout/fragment_browser" >
+        <argument
+            android:name="currentIndex"
+            app:argType="integer" />
     </fragment>
 </navigation>

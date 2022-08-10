@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.privatealbum.R
@@ -31,6 +32,14 @@ class ThumbAdapter(val model: ThumbViewModel): RecyclerView.Adapter<ThumbAdapter
             Glide.with(binding.root)
                 .load(filePath)
                 .into(binding.imageView)
+
+            binding.imageView.setOnClickListener {
+                //完成跳转
+                //获取当前item的索引位置
+                val index = model.thumbImageList.value!!.indexOf(thumbImage)
+                val action = ThumbImageFragmentDirections.actionThumbImageFragmentToBrowserFragment(index)
+                it.findNavController().navigate(action)
+            }
         }
     }
     @SuppressLint("NotifyDataSetChanged")

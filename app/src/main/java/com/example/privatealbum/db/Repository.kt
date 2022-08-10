@@ -1,6 +1,7 @@
 package com.example.privatealbum.db
 
 import android.content.Context
+import androidx.room.Delete
 import kotlinx.coroutines.flow.Flow
 
 class Repository(context: Context) {
@@ -43,6 +44,11 @@ class Repository(context: Context) {
     //查询某个相册的所有图片
     suspend fun getAllImagesWithAlbumId(albumId: Int):Flow<List<ThumbImage>>{
         return albumDao.getAllImagesWithAlbumId(albumId)
+    }
+
+    //删除一张图片
+    suspend fun deleteImage(thumbImage: ThumbImage){
+        albumDao.deleteImage(thumbImage)
     }
 }
 
